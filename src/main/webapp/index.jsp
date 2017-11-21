@@ -12,7 +12,8 @@
 	</head>
 	<body>
 
-		<h1>Iniciar sesion</h1>
+		<h1>Iniciar sesion</h1>	
+		<h3> Hola Mundo!!! </h3>	
 		<p><a href="register.jsp">Registrarse</a></p>
 		<p style="color: #ff0000">${sessionScope['error']}</p>
 		<form action="Login" method="post">

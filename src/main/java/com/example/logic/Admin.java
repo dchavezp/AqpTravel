@@ -2,14 +2,105 @@ package com.example.logic;
 
 
 public class Admin {
-	private final String idAdmin;
-	private final String name;
-	private final String lastname;
-	private final String email;
-	private final String phone;
-	private final String address;
-	private final String password;
-	private char state;
+
+	
+	private  Integer idAdmin;
+	private  String nombre;
+	private  String apellidoAdmin;
+	private  String celularAdmin;
+	private  String correoAdmin;
+	private  String direccionAdmin;
+	private  String contrasenaAdmin;
+	private  String estadoAdmin;
+	
+	
+	public Admin() {
+		super();
+	}
+	public Admin(Integer idAdmin) {
+		super();
+		this.idAdmin = idAdmin;		
+		this.nombre = "";
+		this.apellidoAdmin = "";
+		this.celularAdmin = "";
+		this.correoAdmin = "";
+		this.direccionAdmin = "";
+		this.contrasenaAdmin = "";
+		this.estadoAdmin = "";
+	}
+	
+	public Admin(String nombre, String apellidoAdmin) {
+		super();
+		this.nombre = nombre;
+		this.apellidoAdmin = apellidoAdmin;
+	}
+	
+	public Admin(String nombre, String apellidoAdmin, String celularAdmin, String correoAdmin, String direccionAdmin,
+			String contrasenaAdmin, String estadoAdmin) {
+		super();
+		this.nombre = nombre;
+		this.apellidoAdmin = apellidoAdmin;
+		this.celularAdmin = celularAdmin;
+		this.correoAdmin = correoAdmin;
+		this.direccionAdmin = direccionAdmin;
+		this.contrasenaAdmin = contrasenaAdmin;
+		this.estadoAdmin = estadoAdmin;
+	}
+	
+	
+	
+	public Integer getIdAdmin() {
+		return idAdmin;
+	}
+	public void setIdAdmin(Integer idAdmin) {
+		this.idAdmin = idAdmin;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getCelularAdmin() {
+		return celularAdmin;
+	}
+	public void setCelularAdmin(String celularAdmin) {
+		this.celularAdmin = celularAdmin;
+	}
+	public String getCorreoAdmin() {
+		return correoAdmin;
+	}
+	public void setCorreoAdmin(String correoAdmin) {
+		this.correoAdmin = correoAdmin;
+	}
+	public String getDireccionAdmin() {
+		return direccionAdmin;
+	}
+	public void setDireccionAdmin(String direccionAdmin) {
+		this.direccionAdmin = direccionAdmin;
+	}
+	public String getContrasenaAdmin() {
+		return contrasenaAdmin;
+	}
+	public void setContrasenaAdmin(String contrasenaAdmin) {
+		this.contrasenaAdmin = contrasenaAdmin;
+	}
+	public String getEstadoAdmin() {
+		return estadoAdmin;
+	}
+	public void setEstadoAdmin(String estadoAdmin) {
+		this.estadoAdmin = estadoAdmin;
+	}
+	public String getApellidoAdmin() {
+		return apellidoAdmin;
+	}
+	public void setApellidoAdmin(String apellidoAdmin) {
+		this.apellidoAdmin = apellidoAdmin;
+	}	
+	
+	
+	
+	/*
 	public static class BuildAdmin implements BuildUser<Admin>{
 		//Required parameters 
 		private final String name;
@@ -21,6 +112,8 @@ public class Admin {
 		private String address="";
 		private String password="";
 		private char state='0';
+		
+		
 		public BuildAdmin(String name,String email) {
 			this.name=name;
 			this.email=email;
@@ -70,32 +163,6 @@ public class Admin {
 		this.state=build.state;
 		this.address=build.address;
 	}
-	public String getIdAdmin() {
-		return idAdmin;
-	}
-	public String getName() {
-		return name;
-	}
-	public String getLastname() {
-		return lastname;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setState(char c) {
-		this.state=c;
-	}
-	public char getState() {
-		return state;
-	}
+	*/
 }
 

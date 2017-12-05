@@ -25,7 +25,7 @@ public class AdminDaoImpl implements AdminDao{
 	@Override
 	public List<Admin> listAllAdmin() {
 		// TODO Auto-generated method stub		
-		String sql = "SELECT idAdmin, nombre, apellidoAdmin FROM admin";
+		String sql = "SELECT idAdmin, nombre, apellidoAdmin, correoAdmin, estadoAdmin FROM admin";
 
 		List<Admin> listContact = jdbcTemplate.query(sql, new RowMapper<Admin>() {
 
@@ -37,6 +37,8 @@ public class AdminDaoImpl implements AdminDao{
 				aContact.setIdAdmin(rs.getInt("idAdmin"));
 				aContact.setNombre(rs.getString("nombre"));
 				aContact.setApellidoAdmin(rs.getString("apellidoAdmin"));
+				aContact.setCorreoAdmin(rs.getString("correoAdmin"));
+				aContact.setEstadoAdmin(rs.getString("estadoAdmin").charAt(0));
 				return aContact;
 			}
 
@@ -46,33 +48,32 @@ public class AdminDaoImpl implements AdminDao{
 
 	@Override
 	public void addAdmin(Admin admin) {
-		String sql = "INSERT INTO admin(nombre,apellidoAdmin,celularAdmin,correoAdmin,direccionAdmin,contrasenaAdmin,estadoAdmin) values (?, ?, ?, ?, ?, ?, ?)";
-		
+		String sql = "INSERT INTO admin(nombre,apellidoAdmin,celularAdmin,correoAdmin,direccionAdmin,contrasenaAdmin) values (?, ?, ?, ?, ?, ?)";
+
 		jdbcTemplate.update(sql,
 				admin.getNombre(),
 				admin.getApellidoAdmin(),
 				admin.getCelularAdmin(),
 				admin.getCorreoAdmin(),
 				admin.getDireccionAdmin(),
-				admin.getContrasenaAdmin(),
-				admin.getEstadoAdmin());		
+				admin.getContrasenaAdmin());		
 	}
 
 	@Override
 	public void updateAdmin(Admin admin) {
 		// TODO Auto-generated method stub
 		String sql = "UPDATE admin SET nombre = '" + admin.getNombre()
-				+ "', apellidoAdmin = '" + admin.getApellidoAdmin()
-				+ "', celularAdmin = '" + admin.getCelularAdmin()
-				+ "', correoAdmin = '" + admin.getCorreoAdmin()
-				+ "', direccionAdmin = '" + admin.getDireccionAdmin()
-				+ "', contrasenaAdmin = '" + admin.getContrasenaAdmin()
-				+ "', estadoAdmin = '" + admin.getEstadoAdmin() + "' WHERE idAdmin = "+ admin.getIdAdmin()+"";
-		
+		+ "', apellidoAdmin = '" + admin.getApellidoAdmin()
+		+ "', celularAdmin = '" + admin.getCelularAdmin()
+		+ "', correoAdmin = '" + admin.getCorreoAdmin()
+		+ "', direccionAdmin = '" + admin.getDireccionAdmin()
+		+ "', contrasenaAdmin = '" + admin.getContrasenaAdmin()
+		+ "', estadoAdmin = '" + admin.getEstadoAdmin() + "' WHERE idAdmin = "+ admin.getIdAdmin()+"";
+
 		jdbcTemplate.update(sql);
 
 	}
-	
+
 
 	@Override
 	public void deleteAdmin(Admin admin) {		
@@ -100,8 +101,17 @@ public class AdminDaoImpl implements AdminDao{
 			}
 
 		});		 
-		
+
 		return listContact.get(0);		
+	}
+
+	public void changeStateAdmin(int idAdmin, char state){
+
+		String sql = "UPDATE admin SET estadoAdmin = '" + state 
+		+ "' WHERE idAdmin = "+ idAdmin +"";
+
+		jdbcTemplate.update(sql);
+
 	}
 
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {

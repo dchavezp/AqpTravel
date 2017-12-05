@@ -11,11 +11,12 @@ public class Admin {
 	private  String correoAdmin;
 	private  String direccionAdmin;
 	private  String contrasenaAdmin;
-	private  String estadoAdmin;
+	private  char estadoAdmin;
 	
 	
 	public Admin() {
 		super();
+		
 	}
 	public Admin(Integer idAdmin) {
 		super();
@@ -26,7 +27,7 @@ public class Admin {
 		this.correoAdmin = "";
 		this.direccionAdmin = "";
 		this.contrasenaAdmin = "";
-		this.estadoAdmin = "";
+		this.estadoAdmin = '0';
 	}
 	
 	public Admin(String nombre, String apellidoAdmin) {
@@ -36,7 +37,7 @@ public class Admin {
 	}
 	
 	public Admin(String nombre, String apellidoAdmin, String celularAdmin, String correoAdmin, String direccionAdmin,
-			String contrasenaAdmin, String estadoAdmin) {
+			String contrasenaAdmin, char estadoAdmin) {
 		super();
 		this.nombre = nombre;
 		this.apellidoAdmin = apellidoAdmin;
@@ -85,10 +86,10 @@ public class Admin {
 	public void setContrasenaAdmin(String contrasenaAdmin) {
 		this.contrasenaAdmin = contrasenaAdmin;
 	}
-	public String getEstadoAdmin() {
+	public char getEstadoAdmin() {
 		return estadoAdmin;
 	}
-	public void setEstadoAdmin(String estadoAdmin) {
+	public void setEstadoAdmin(char estadoAdmin) {
 		this.estadoAdmin = estadoAdmin;
 	}
 	public String getApellidoAdmin() {

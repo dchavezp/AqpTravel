@@ -64,7 +64,7 @@
 					<label for="direccionAdmin"><span class="Icon-lock"></span>
 						Direccion</label>
 					<div class="input-group mb-2 mb-sm-0">
-						<input type="password" class="form-control" id="direccionAdmin"
+						<input type="text" class="form-control" id="direccionAdmin"
 							name="direccionAdmin" placeholder="direccion">
 					</div>
 				</div>
@@ -77,16 +77,7 @@
 						<input type="password" class="form-control" id="contrasenaAdmin" 
 							name="contrasenaAdmin" placeholder="Ingrese Contraseña">
 					</div>
-				</div>
-
-				<div class="form-group">
-					<label for="estadoAdmin"><span class="Icon-lock"></span>
-						Estado</label>
-					<div class="input-group mb-2 mb-sm-0">
-						<input type="password" class="form-control" id="estadoAdmin"
-							name="estadoAdmin" placeholder="Ingrese Contraseña">
-					</div>
-				</div>
+				</div>				
 
 				<div id="div_sub_reg" class="form-group justify-content-center">
 					<center>

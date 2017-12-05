@@ -1,4 +1,4 @@
-alert("haha");
+alert("cargando datos");
 
-/* cargando lista de usuarios */
-$('#list_user').load('admin/list_admin'); 
+	
+	

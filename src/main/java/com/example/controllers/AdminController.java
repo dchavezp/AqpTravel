@@ -3,6 +3,8 @@ package com.example.controllers;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
@@ -19,13 +21,94 @@ import com.example.logic.Admin;
 
 @Controller
 public class AdminController {
-	
+
 	@Autowired
 	AdminDao adminDao;
-	
-	/* Request para obtener lista de Usuarios */
 
-	@RequestMapping(value="admin/list_admin", produces="text/html;charset=UTF-8")
+	/* Request para obtener lista de usaurios */
+	@RequestMapping(value="admin/list_admin",  method=RequestMethod.POST, produces="text/html;charset=UTF-8")
+	@ResponseBody
+	public String listContact(ModelAndView model) throws IOException{
+		List<Admin> listContact = adminDao.listAllAdmin();
+
+		String response="";
+		int cont = 0;
+		for(Admin admin : listContact){
+			response += "<tr>" +
+					"<td>"+ (++cont) +"</td>" +
+					"<td>"+admin.getNombre()+"</td>" +
+					"<td>"+admin.getApellidoAdmin()+"</td>" +
+					"<td>"+admin.getCorreoAdmin()+"</td>";
+
+			if(admin.getEstadoAdmin() == '1'){
+				response += " <td> "
+						+ "<input type='checkbox' name='onoffswitch' class='checkAdmin onoffswitch-checkbox' id='' value='activo' onchange='changeCheckBox("+admin.getIdAdmin()+", this)' checked>"
+						+ "</td></tr>";
+
+			}else if(admin.getEstadoAdmin() == '0'){
+				response += " <td> "
+						+ "<input type='checkbox' name='onoffswitch' class='checkAdmin onoffswitch-checkbox' id='' value='desactivo' onchange='changeCheckBox("+admin.getIdAdmin()+", this)' >"
+						+ "</td></tr>";
+			}			
+		}
+		return response; 
+	}
+
+	/* Request para cargar la pagina del Admin */
+	@RequestMapping(value="admin", method=RequestMethod.GET)
+	public ModelAndView index(ModelAndView model) throws IOException{
+		ModelAndView model2 = new ModelAndView();
+		model2.setViewName("usuarios_admin");
+		
+		return model2;
+	}
+	
+
+	/* Request para agregar usuario a la BD */
+	@RequestMapping(value="admin/saveAdmin", method=RequestMethod.POST)
+	@ResponseBody 
+	public String saveAdmin(@RequestBody MultiValueMap<String,String> params) throws IOException{    
+	
+		Admin admin = new Admin();
+
+		admin.setNombre(params.getFirst("nombre"));
+		admin.setApellidoAdmin(params.getFirst("apellidoAdmin"));
+		admin.setCelularAdmin(params.getFirst("celularAdmin"));
+		admin.setCorreoAdmin(params.getFirst("correoAdmin"));
+		admin.setDireccionAdmin(params.getFirst("direccionAdmin"));
+		admin.setContrasenaAdmin(params.getFirst("contrasenaAdmin"));		
+		adminDao.addAdmin(admin);
+		return "true";
+	} 	
+
+
+	@RequestMapping(value="admin/paquetes", method=RequestMethod.GET)
+	public ModelAndView paquetes(ModelAndView model) throws IOException{
+
+		ModelAndView model2 = new ModelAndView();
+		model2.setViewName("paquete_admin");	 
+		
+		return model2;
+
+	}
+
+	
+	/*  Request cambiar stado de usuario */
+	
+	@RequestMapping(value="admin/changeStateAdmin", method=RequestMethod.POST)
+	@ResponseBody
+	public String changeStateAdmin(HttpServletRequest request) throws IOException{
+		
+		String []a1 = request.getParameterValues("key");	
+		String []a2 = request.getParameterValues("state");
+	
+		adminDao.changeStateAdmin(Integer.parseInt(a1[0]), a2[0].charAt(0));		
+		return "true";		
+		
+	}
+
+		/*
+	 * @RequestMapping(value="admin/list_admin", produces="text/html;charset=UTF-8")
 	@ResponseBody
 	public String listContact(ModelAndView model) throws IOException{
 		List<Admin> listContact = adminDao.listAllAdmin();
@@ -39,37 +122,19 @@ public class AdminController {
 			"<td>"+admin.getNombre()+"</td>" +
 			"<td>"+admin.getApellidoAdmin()+"</td>" +
 			"<td>"+admin.getCorreoAdmin()+"</td>" +
+			" <td> <div class='onoffswitch'>"
+			+ "<input type='checkbox' name='onoffswitch' class='onoffswitch-checkbox' id='myonoffswitch' checked>"
+					+ "  <label class='onoffswitch-label' for='myonoffswitch'>"
+							+ "        <span class='onoffswitch-inner'></span>"
+									+ "	        <span class='onoffswitch-switch'></span>"
+											+ "	    </label>"
+											+ "	</div> </td>"+
 			"</tr>";			
 		}
-		
+
+
 		return response; 
-	}
-	
-	/* Request para cargar la pagina del Admin */
-	@RequestMapping(value="admin", method=RequestMethod.GET)
-	public ModelAndView index(ModelAndView model) throws IOException{
-		
-		model.setViewName("admin/usuarios_admin");	 		
-		return model;
-	}
-	
-	/* Request para agregar Usuario a la BD */
-	@RequestMapping(value="admin/saveAdmin", method=RequestMethod.POST)
-	@ResponseBody 
-	public String saveAdmin(@RequestBody MultiValueMap<String,String> params) throws IOException{    
-       System.out.println("controoller!!");
-		Admin admin = new Admin();
-            		
-		admin.setNombre(params.getFirst("nombre"));
-		admin.setApellidoAdmin(params.getFirst("apellidoAdmin"));
-		admin.setCelularAdmin(params.getFirst("celularAdmin"));
-		admin.setCorreoAdmin(params.getFirst("correoAdmin"));
-		admin.setDireccionAdmin(params.getFirst("direccionAdmin"));
-		admin.setContrasenaAdmin(params.getFirst("contrasenaAdmin"));
-		admin.setEstadoAdmin(params.getFirst("estadoAdmin"));
-		
-		adminDao.addAdmin(admin);
-		return "true";
-	} 	
+	}*/
+
 
 }

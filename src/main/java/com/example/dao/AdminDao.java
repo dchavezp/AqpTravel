@@ -16,5 +16,7 @@ public interface AdminDao {
 	
 	public Admin findAdminById(int id);
 	
+	public void changeStateAdmin(int id, char state);
+	
 
 }

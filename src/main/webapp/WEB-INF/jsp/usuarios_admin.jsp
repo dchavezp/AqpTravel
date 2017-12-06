@@ -30,7 +30,7 @@ $(document).ready(function() {
 
 <link href="<c:url value="/resources/css/bootstrap.css"/> " rel="stylesheet" 	media="all">
 <!-- Custom Theme files -->
-<link href="<c:url value="/resources/css/style.css"/> " rel="stylesheet" 	media="all">
+<link href="<c:url value="/resources/css/style2.css"/> " rel="stylesheet" 	media="all">
 <!--js-->
 
 
